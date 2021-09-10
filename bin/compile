@@ -388,6 +388,9 @@ install_plugin "$BP_DIR" "$BUILD_DIR"
 
 meta_set "build-step" "summarize"
 header "Build succeeded!" | output "$LOG_FILE"
+
+rm -rf "$BUILD_DIR/node_modules"
+
 mcount "compile"
 summarize_build | output "$LOG_FILE"
 meta_set "node-build-success" "true"
