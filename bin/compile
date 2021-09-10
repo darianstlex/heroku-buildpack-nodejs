@@ -308,6 +308,9 @@ build_dependencies() {
   else
     npm_node_modules "$BUILD_DIR"
   fi
+  
+  echo "DIR LIST"
+  li -a
 
   mtime "modules.time.cache.$cache_status" "${start}"
 
