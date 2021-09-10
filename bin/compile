@@ -308,9 +308,6 @@ build_dependencies() {
   else
     npm_node_modules "$BUILD_DIR"
   fi
-  
-  echo "DIR LIST"
-  ls -a
 
   mtime "modules.time.cache.$cache_status" "${start}"
 
@@ -330,7 +327,6 @@ cache_build() {
   cache_build_start_time=$(nowms)
   cache_directories="$(get_cache_directories "$BUILD_DIR")"
 
-  # clear_cache "$CACHE_DIR"
   if ! ${NODE_MODULES_CACHE:-true}; then
     # we've already warned that caching is disabled in the restore step
     # so be silent here
@@ -342,6 +338,7 @@ cache_build() {
     header "Caching build"
     save_custom_cache_directories "$BUILD_DIR" "$CACHE_DIR" "$cache_directories"
   fi
+  clear_cache "$CACHE_DIR"
   save_signature "$CACHE_DIR"
   meta_time "save-cache-time" "$cache_build_start_time"
 }
