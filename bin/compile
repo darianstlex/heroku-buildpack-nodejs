@@ -326,6 +326,8 @@ cache_build() {
   local cache_directories cache_build_start_time
   cache_build_start_time=$(nowms)
   cache_directories="$(get_cache_directories "$BUILD_DIR")"
+  
+  clear_cache "$CACHE_DIR"
 
   if ! ${NODE_MODULES_CACHE:-true}; then
     # we've already warned that caching is disabled in the restore step
@@ -338,7 +340,10 @@ cache_build() {
     header "Caching build"
     save_custom_cache_directories "$BUILD_DIR" "$CACHE_DIR" "$cache_directories"
   fi
-  clear_cache "$CACHE_DIR"
+  echo "BUILD_DIR: $BUILD_DIR"
+  echo "CACHE_DIR: $CACHE_DIR"
+  echo "CACHE_DIRS: $cache_directories"
+
   save_signature "$CACHE_DIR"
   meta_time "save-cache-time" "$cache_build_start_time"
 }
